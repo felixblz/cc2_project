@@ -1,0 +1,24 @@
+---
+- name: Install Kubernetes on Debian VM
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Download K3s install script
+      get_url:
+        url: https://get.k3s.io/
+        timeout: 120
+        dest: /usr/local/bin/k3s-install.sh
+        owner: root
+        group: root
+        mode: "0755"
+    - name: Download K3s binary
+      command:
+        cmd: /usr/local/bin/k3s-install.sh
+      changed_when: true
+
+    - name: Ensure K3s service is running
+      systemd:
+        name: k3s
+        enabled: yes
+        state: started

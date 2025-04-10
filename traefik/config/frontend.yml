@@ -1,0 +1,20 @@
+http:
+  routers:
+    frontendhttp:
+      entryPoints: http
+      service: frontend_service
+      rule: PathPrefix(`/`)
+      priority: 10
+      tls: false
+    frontend:
+      entryPoints: https
+      service: frontend_service
+      rule: PathPrefix(`/`)
+      priority: 10
+      tls: true
+
+  services:
+    frontend_service:
+      loadBalancer:
+        servers:
+        - url: http://frontend:80

@@ -1,0 +1,19 @@
+---
+- name: Configure locales on Debian VM
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Set default locale to de_DE.UTF-8
+      ansible.builtin.debconf:
+        name: locales
+        question: locales/default_environment_locale
+        value: de_DE.UTF-8
+        vtype: select
+
+    - name: Set to generate locales
+      ansible.builtin.debconf:
+        name: locales
+        question: locales/locales_to_be_generated
+        value: en_US.UTF-8 UTF-8, de_DE.UTF-8 UTF-8
+        vtype: multiselect

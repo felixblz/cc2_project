@@ -1,0 +1,32 @@
+---
+- name: Build and Start App
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Ensure Docker service is running
+      service:
+        name: docker
+        state: started
+        enabled: yes
+    
+    - name: Copy Frontend Files
+      copy:
+        src: ../frontend/
+        dest: /home/adminuser/frontend/
+
+    - name: Copy Traefik Files
+      copy:
+        src: ../traefik/
+        dest: /home/adminuser/traefik/
+
+    - name: Copy Docker Compose File
+      copy:
+        src: ../compose.yaml
+        dest: /home/adminuser/compose.yaml
+
+    - name: Create and start services
+      community.docker.docker_compose_v2:
+        project_src: .
+        build: always
+      register: output

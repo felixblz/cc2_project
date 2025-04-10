@@ -1,0 +1,21 @@
+http:
+  routers:
+    backendhttp:
+      entryPoints: http
+      service: backend_service
+      rule: PathPrefix(`/api`)
+      middlewares: httpsnonperm
+      priority: 100
+      tls: false
+    backend:
+      entryPoints: https
+      service: backend_service
+      rule: PathPrefix(`/api`)
+      priority: 100
+      tls: true
+
+  services:
+    backend_service:
+      loadBalancer:
+        servers:
+        - url: http://backend:8000

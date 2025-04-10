@@ -1,0 +1,22 @@
+{
+  "private_ip_address": {
+    "sensitive": false,
+    "type": "string",
+    "value": "10.0.1.4"
+  },
+  "public_ip_address": {
+    "sensitive": false,
+    "type": "string",
+    "value": "4.184.219.236"
+  },
+  "resource_group_name": {
+    "sensitive": false,
+    "type": "string",
+    "value": "cc2-rg-enjoyed-buck"
+  },
+  "vm_fqdn": {
+    "sensitive": false,
+    "type": "string",
+    "value": "cc2-cc2-rg-enjoyed-buck.germanywestcentral.cloudapp.azure.com"
+  }
+}

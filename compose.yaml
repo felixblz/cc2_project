@@ -1,0 +1,15 @@
+services:
+  frontend:
+    build: frontend
+  backend:
+    build: backend
+
+  traefik:
+    image: traefik:v3.3
+    ports:
+      - "8080:8080"
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "./traefik/traefik.yml:/etc/traefik/traefik.yml"
+      - "./traefik/config/:/etc/traefik/config"

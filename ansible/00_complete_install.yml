@@ -1,0 +1,13 @@
+---
+- name: Complete Configuration and Install of App
+  hosts: all
+  become: yes
+
+- name: Start Local Configuration
+  import_playbook: 01_configure_locales.yml
+
+- name: Start Docker Installation
+  import_playbook: 02_install_docker.yml
+
+- name: Start App Build and Start
+  import_playbook: 03_build_and_start_app.yml
